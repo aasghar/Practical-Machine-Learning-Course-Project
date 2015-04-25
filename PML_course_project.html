@@ -119,8 +119,23 @@ testset2 &lt;- trainset1[-trainIndex,]</code></pre>
 <p>We then use the ‘randomForest’ machine learning algorithm to develop a model based on the selected variables. The ‘randomForest’ machine learning process is used due to its good accuracy and wide popularity in the machine learning community.</p>
 <p>After, the model is developed, we use the ‘testset2’ dataset that we partitioned from the training dataset to cross-validate the ‘classe’ outcome that we got using our machine learning model. Cross-validation results and statistics are calculated using the confusionMatrix command to determine the accuracy of our model.</p>
 <pre class="r"><code>fitModel1 &lt;- randomForest(classe ~., data = trainset2)
-
-predicted &lt;- predict(fitModel1, testset2)
+fitModel1</code></pre>
+<pre><code>## 
+## Call:
+##  randomForest(formula = classe ~ ., data = trainset2) 
+##                Type of random forest: classification
+##                      Number of trees: 500
+## No. of variables tried at each split: 7
+## 
+##         OOB estimate of  error rate: 0.46%
+## Confusion matrix:
+##      A    B    C    D    E  class.error
+## A 4183    1    1    0    0 0.0004778973
+## B   13 2834    1    0    0 0.0049157303
+## C    0   12 2553    2    0 0.0054538372
+## D    0    0   22 2387    3 0.0103648425
+## E    0    0    2   10 2694 0.0044345898</code></pre>
+<pre class="r"><code>predicted &lt;- predict(fitModel1, testset2)
 confusionMatrix(predicted, testset2$classe)</code></pre>
 <pre><code>## Confusion Matrix and Statistics
 ## 
@@ -153,7 +168,8 @@ confusionMatrix(predicted, testset2$classe)</code></pre>
 ## Detection Rate         0.2843   0.1913   0.1735   0.1625   0.1827
 ## Detection Prevalence   0.2855   0.1919   0.1762   0.1637   0.1827
 ## Balanced Accuracy      0.9988   0.9938   0.9961   0.9949   0.9972</code></pre>
-<p>The confusionMatrix results reveal an <strong><em>accuracy of about 99.4%</em></strong> which is very good. The out of sample accuracy for the final test data, based on the confusionMatrix results, is estimated to be in the range of 99.2-99.6% with a 95% confidence. This estimation is based on results from the confusionMatrix command. This accuracy is a result of the use of a large number of variables as well as a large set of data.</p>
+<p><strong><em>The randomForest results show that the out-of-bag error is about 0.46% which would be a good estimate for the out of sample error.</em></strong></p>
+<p>The confusionMatrix results reveal an accuracy of about 99.4% which corresponds to an <strong><em>error of about 0.6%.</em></strong> The out of sample accuracy for the final test data, based on the confusionMatrix results, is estimated to be in the range of 99.2-99.6% with a 95% confidence. <strong><em>This would mean an out of sample error rate of about 0.4-0.8%.</em></strong> This estimation is based on results from the confusionMatrix command. This accuracy is a result of the use of a large number of variables as well as a large set of data.</p>
 <p>Finally, after we are satisfied with the accuracy levels of our model, we apply it to the official test dataset to predict the outcomes.</p>
 <p>Then, we make individual files of predicted test results which were predicted using the machine learning model we developed and the test data set. These files are then used for the submission of this assignment on Coursera.</p>
 <pre class="r"><code>predict_test &lt;- predict(fitModel1, testset)

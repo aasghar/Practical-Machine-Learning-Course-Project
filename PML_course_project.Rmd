@@ -86,6 +86,7 @@ After, the model is developed, we use the 'testset2' dataset that we partitioned
 ```{r}
 
 fitModel1 <- randomForest(classe ~., data = trainset2)
+fitModel1
 
 predicted <- predict(fitModel1, testset2)
 confusionMatrix(predicted, testset2$classe)
@@ -93,7 +94,9 @@ confusionMatrix(predicted, testset2$classe)
 
 ```
 
-The confusionMatrix results reveal an ***accuracy of about 99.4%*** which is very good. The out of sample accuracy for the final test data, based on the confusionMatrix results, is estimated to be in the range of 99.2-99.6% with a 95% confidence. This estimation is based on results from the confusionMatrix command. This accuracy is a result of the use of a large number of variables as well as a large set of data. 
+***The randomForest results show that the out-of-bag error is about 0.46% which would be a good estimate for the out of sample error.*** 
+
+The confusionMatrix results reveal an accuracy of about 99.4% which corresponds to an ***error of about 0.6%.*** The out of sample accuracy for the final test data, based on the confusionMatrix results, is estimated to be in the range of 99.2-99.6% with a 95% confidence. ***This would mean an out of sample error rate of about 0.4-0.8%.*** This estimation is based on results from the confusionMatrix command. This accuracy is a result of the use of a large number of variables as well as a large set of data. 
 
 Finally, after we are satisfied with the accuracy levels of our model, we apply it to the official test dataset to predict the outcomes. 
 
