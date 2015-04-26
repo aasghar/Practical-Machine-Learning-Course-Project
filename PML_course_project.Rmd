@@ -79,7 +79,7 @@ testset2 <- trainset1[-trainIndex,]
 
 ```
 
-We then use the 'randomForest' machine learning algorithm to develop a model based on the selected variables. The 'randomForest' machine learning process is used due to its good accuracy and wide popularity in the machine learning community. 
+We then use the 'randomForest' machine learning algorithm to develop a model based on the selected variables. The 'randomForest' machine learning process is used due to its good accuracy and wide popularity in the machine learning community. Additionally the use of the randomForest algorithm is inspired by the original publication on this topic which also uses randomForest to train its model. This publication can be found at: http://groupware.les.inf.puc-rio.br/public/papers/2013.Velloso.QAR-WLE.pdf 
 
 After, the model is developed, we use the 'testset2' dataset that we partitioned from the training dataset to cross-validate the 'classe' outcome that we got using our machine learning model. Cross-validation results and statistics are calculated using the confusionMatrix command to determine the accuracy of our model. 
 
